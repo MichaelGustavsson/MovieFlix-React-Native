@@ -11,15 +11,21 @@ const LoginScreen = () => {
     setUserName(value);
   };
 
+  const onChangePasswordHandler = (value) => {
+    setPassword(value);
+  };
+
   const onResetLoginHandler = () => {
     setUserName('');
   };
 
   const onLoginHandler = () => {
-    if (userName.trim().length === 0) {
-      Alert.alert('Problem med inloggning', 'Användarnamn måste anges!', [
-        { text: 'OK', style: 'default', onPress: onResetLoginHandler },
-      ]);
+    if (userName.trim().length === 0 || password.trim().length === 0) {
+      Alert.alert(
+        'Problem med inloggning',
+        'Användarnamn och lösenord måste anges!',
+        [{ text: 'OK', style: 'default', onPress: onResetLoginHandler }]
+      );
     }
   };
 
@@ -46,6 +52,8 @@ const LoginScreen = () => {
           placeholderTextColor={'#cecccc'}
           keyboardType='default'
           secureTextEntry={true}
+          value={password}
+          onChangeText={onChangePasswordHandler}
         />
         <View style={styles.buttonsContainer}>
           <MainButton onPressed={onLoginHandler}>Logga In</MainButton>
@@ -69,6 +77,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     backgroundColor: '#611313',
     borderRadius: 10,
+    elevation: 10,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 6,
+    shadowOpacity: 0.9,
   },
   userNameInput: {
     height: 28,
