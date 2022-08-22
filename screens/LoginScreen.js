@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
 
-import MainButton from '../components/ui/MainButton';
+import Colors from '../utilities/constants/colors';
 
-const LoginScreen = () => {
+import MainButton from '../components/ui/MainButton';
+import AppHeader from '../components/ui/AppHeader';
+
+const LoginScreen = ({ onLogin }) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
@@ -26,7 +29,9 @@ const LoginScreen = () => {
         'Användarnamn och lösenord måste anges!',
         [{ text: 'OK', style: 'default', onPress: onResetLoginHandler }]
       );
+      return;
     }
+    onLogin(true);
   };
 
   const onRegisterHandler = () => {
@@ -35,6 +40,10 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.screen}>
+      <AppHeader>MovieFlix</AppHeader>
+      <View>
+        <Text style={styles.titleText}>Vänligen logga in</Text>
+      </View>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.userNameInput}
@@ -69,7 +78,6 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    marginTop: 70,
   },
   inputContainer: {
     padding: 16,
@@ -94,5 +102,17 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     flexDirection: 'row',
+  },
+  titleText: {
+    color: Colors.lightText,
+    textAlign: 'center',
+    fontSize: 28,
+    fontWeight: 'bold',
+    borderWidth: 2,
+    borderColor: Colors.lightText,
+    padding: 12,
+    marginHorizontal: 20,
+    marginVertical: 30,
+    borderRadius: 5,
   },
 });

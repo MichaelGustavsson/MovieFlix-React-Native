@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   StyleSheet,
   ImageBackground,
@@ -6,26 +7,38 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import Colors from './utilities/constants/colors';
+
 import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const isLoggedInHandler = (value) => {
+    if (value) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  };
+
+  let screen = <LoginScreen onLogin={isLoggedInHandler} />;
+
+  if (isLoggedIn) {
+    screen = <MainScreen />;
+  }
   return (
     <>
       <StatusBar barStyle='light-content' />
-      <LinearGradient
-        colors={['#000000', '#080707', '#1b1a1a', '#4d4b4b']}
-        style={styles.screen}
-      >
+      <LinearGradient colors={Colors.gradient} style={styles.screen}>
         <ImageBackground
           source={require('./assets/images/Batman.jpg')}
           resizeMode='cover'
           style={styles.screen}
           imageStyle={styles.backgroundImage}
         >
-          <SafeAreaView style={styles.screen}>
-            <LoginScreen />
-          </SafeAreaView>
+          <SafeAreaView style={styles.screen}>{screen}</SafeAreaView>
         </ImageBackground>
       </LinearGradient>
     </>

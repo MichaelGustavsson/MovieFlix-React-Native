@@ -1,4 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
+import Colors from '../../utilities/constants/colors';
+
 const MainButton = ({ children, onPressed }) => {
   return (
     <View style={styles.buttonContainer}>
@@ -14,14 +16,14 @@ export default MainButton;
 const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
-    borderColor: '#ddb52f',
+    borderColor: Colors.secondaryText,
     borderWidth: 2,
     margin: 3,
     borderRadius: 30,
     overflow: 'hidden',
   },
   buttonText: {
-    color: '#ddb52f',
+    color: Colors.secondaryText,
     paddingVertical: 8,
     textAlign: 'center',
     fontWeight: 'bold',
